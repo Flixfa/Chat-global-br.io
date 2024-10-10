@@ -1,0 +1,31 @@
+// server.js
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+app.use(express.static('public')); // Servir arquivos estáticos
+
+// Rota principal
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+// Gerenciar conexões de socket
+io.on('connection', (socket) => {
+    console.log('Um usuário conectado');
+
+    // Receber mensagem do cliente
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg); // Enviar mensagem para todos os clientes
+    });
+
+    // Desconectar
+    socket.on('dis
+});
+
+// Iniciar o servidor
+const PORT = process.env.PORT || 3000;

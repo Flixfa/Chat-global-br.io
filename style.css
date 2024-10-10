@@ -1,0 +1,206 @@
+/* Estilo geral do body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #36393F; /* Fundo do Discord */
+    color: #ffffff;
+}
+
+/* Estilo do cabeçalho */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #2F3136; /* Cor de fundo da header */
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Estilo do título do chat */
+.chat-title {
+    flex-grow: 1; /* Faz o título ocupar o espaço disponível */
+    font-size: 20px; /* Tamanho do texto do título */
+    color: #7289DA; /* Cor do título do chat */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+}
+
+/* Estilo da imagem do perfil */
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Faz a imagem ser redonda */
+    margin-right: 10px;
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    border: 2px solid #5cb85c; /* Borda verde ao redor da foto */
+}
+
+/* Estilo para exibir o nome do usuário */
+#username-display {
+    font-size: 1.2em; /* Tamanho do texto do nome do usuário */
+    color: #ffffff;
+}
+
+/* Estilo do container do chat */
+.chat-container {
+    max-width: 600px; /* Largura máxima do chat */
+    margin: auto; /* Centraliza o chat */
+    border: 1px solid #444; /* Borda do chat */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px;
+    background-color: #40444B; /* Cor de fundo do chat */
+    display: flex;
+    flex-direction: column; /* Permite empilhar elementos verticalmente */
+    height: 400px; /* Altura do chat */
+}
+
+/* Estilo da lista de mensagens */
+#messages {
+    list-style-type: none; /* Remove os marcadores */
+    padding: 0; /* Remove o preenchimento padrão */
+    max-height: 350px; /* Altura máxima para a lista de mensagens */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    flex-grow: 1; /* Faz a lista de mensagens ocupar o espaço restante */
+}
+
+/* Estilo das mensagens */
+#messages li {
+    padding: 10px 15px; /* Espaçamento das mensagens */
+    border-radius: 5px; /* Bordas arredondadas para mensagens */
+    margin-bottom: 5px; /* Espaçamento entre mensagens */
+}
+
+/* Estilo para mensagens ímpares */
+#messages li:nth-child(odd) {
+    background-color: #202225; /* Cor de fundo das mensagens ímpares */
+}
+
+/* Estilo para mensagens pares */
+#messages li:nth-child(even) {
+    background-color: #2f3136; /* Cor de fundo das mensagens pares */
+}
+
+/* Estilo do formulário de envio de mensagens */
+form {
+    display: flex; /* Permite o alinhamento horizontal dos elementos */
+    margin-top: 10px; /* Espaçamento acima do formulário */
+}
+
+/* Estilo do campo de texto */
+input {
+    flex: 1; /* Faz o campo ocupar o espaço restante */
+    padding: 10px;
+    border: 1px solid #444; /* Borda do campo de texto */
+    border-radius: 5px;
+    margin-right: 5px;
+    background-color: #2F3136; /* Fundo do campo de texto */
+    color: #ffffff; /* Cor do texto */
+}
+
+/* Estilo do botão de enviar */
+button {
+    padding: 10px;
+    border: none;
+    background-color: #5cb85c; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    border-radius: 5px;
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    transition: background-color 0.3s; /* Animação de transição */
+}
+
+/* Estilo do botão ao passar o mouse */
+button:hover {
+    background-color: #4cae4c; /* Cor do botão ao passar o mouse */
+}
+
+/* Estilo do menu de configurações */
+.settings-menu {
+    position: absolute; /* Para sobrepor ao chat */
+    top: 50px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    background-color: #40444B; /* Cor de fundo do menu */
+    border: 1px solid #444; /* Borda do menu */
+    border-radius: 5px; /* Bordas arredondadas */
+    z-index: 1000; /* Fica acima de outros elementos */
+    width: 200px; /* Largura do menu */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra do menu */
+}
+
+/* Estilo dos itens do menu */
+.menu-item {
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    color: #ffffff; /* Cor do texto */
+}
+
+/* Efeito ao passar o mouse nos itens do menu */
+.menu-item:hover {
+    background-color: #5cb85c; /* Cor ao passar o mouse */
+}
+
+/* Estilo do botão de fechar no menu */
+.close-menu {
+    text-align: center; /* Centraliza o texto */
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    color: #ffffff; /* Cor do texto */
+}
+
+/* Efeito ao passar o mouse no botão de fechar */
+.close-menu:hover {
+    background-color: #c82333; /* Cor ao passar o mouse */
+}
+
+/* Estilo do modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixo na tela */
+    z-index: 1000; /* Fica acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #2F3136; /* Cor de fundo do modal */
+    margin: 15% auto; /* Centraliza o modal */
+    padding: 20px;
+    border: 1px solid #444; /* Borda do modal */
+    width: 80%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima do modal */
+    border-radius: 5px; /* Bordas arredondadas do modal */
+}
+
+/* Botão de fechar do modal */
+.close-button {
+    color: #aaaaaa;
+    float: right; /* Coloca o botão no canto superior direito */
+    font-size: 28px; /* Tamanho do botão */
+    font-weight: bold; /* Peso do botão */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+}
+
+/* Efeitos do botão de fechar ao passar o mouse */
+.close-button:hover,
+.close-button:focus {
+    color: #ffffff; /* Cor ao passar o mouse */
+    text-decoration: none; /* Remove o sublinhado */
+    cursor: pointer; /* Cursor de mão */
+}
+
+/* Estilo para o nome do chat */
+.chat-title {
+    position: absolute; /* Para permitir que o texto fique fixo no canto */
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    font-size: 14px; /* Tamanho da fonte menor */
+    color: #FFFFFF; /* Cor do texto */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    padding: 2px 5px; /* Espaçamento interno menor */
+    border-radius: 5px; /* Bordas arredondadas */
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+}

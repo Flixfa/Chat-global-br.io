@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat br </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="chat-title">CHAT BR 🇧🇷💬</div> <!-- Nome do chat -->
+        <img id="user-profile-pic" src="images/default.png" alt="Profile Pic" class="profile-pic" onclick="document.getElementById('file-input').click();" />
+        <span id="username-display">Usuário: <strong></strong></span>
+        <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="loadProfilePic(event)" />
+    </div>
+
+    <div class="chat-container">
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" autocomplete="off" placeholder="Digite sua mensagem..." />
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let username = prompt("Qual seu nome?");
+        const profilePic = document.getElementById('user-profile-pic').src;
+        document.getElementById('username-display').querySelector('strong').innerText = username;
+
+        // Enviar dados do usuário para o servidor ao entrar
+        socket.emit('join', { name: username, profilePic: profilePic });
+
+        function loadProfilePic(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newProfilePic = e.target.result;
+                document.getElementById('user-profile-pic').src = newProfilePic;
+                // Atualiza a imagem do perfil no servidor
+                socket.emit('join', { name: username, profilePic: newProfilePic });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Enviar mensagem ao servidor
+        document.getElementById('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = document.getElementById('input').value;
+            if (message) {
+                // Emissão da mensagem com nome e imagem de perfil
+                socket.emit('chat message', { text: message, name: username, profilePic: document.getElementById('user-profile-pic').src });
+                document.getElementById('input').value = '';
+            }
+        });
+
+        // Receber mensagens do servidor
+        socket.on('chat message', function(data) {
+            const li = document.createElement('li');
+            li.innerHTML = `<img src="${data.profilePic}" class="profile-pic" alt="Profile Pic" /> 
+                            <span style="color: #ffffff;">${data.name}: ${data.text}</span>`;
+            
+            // Adiciona um evento de clique para responder
+            li.addEventListener('click', function() {
+                document.getElementById('input').value = `@${data.name}: `;
+                document.getElementById('input').focus(); // Focar no campo de entrada
+            });
+
+            document.getElementById('messages').appendChild(li);
+            window.scrollTo(0, document.body.scrollHeight); // Rolagem automática para o final
+        });
+
+        // Mensagem de entrada
+        socket.on('user joined', function(data) {
+            const li = document.createElement('li');
+            li.textContent = `${data.name} entrou no chat`;
+            document.getElementById('messages').appendChild(li);
+        });
+    </script>
+</body>
+</html>
